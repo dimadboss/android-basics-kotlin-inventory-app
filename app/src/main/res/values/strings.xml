@@ -18,6 +18,9 @@
     <string name="sell">Sell</string>
     <string name="quantity">Quantity in Stock:</string>
     <string name="quantity_req">Quantity in Stock <font color='#FF0000'>*</font></string>
+    <string name="email_req">Email<font color='#FF0000'>*</font></string>
+    <string name="text_validation_success">OK</string>
+    <string name="text_validation_error_email">Invalid email</string>
     <string name="item_name_req">Item Name <font color='#FF0000'>*</font></string>
     <string name="item_price_req">Item Price <font color='#FF0000'>*</font></string>
     <string name="save_action">Save</string>
