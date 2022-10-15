@@ -131,8 +131,8 @@ class ItemDetailFragment : Fragment() {
             "TEST\nJ"
         )//bodyEditText.text.toString())
 
-//        // (Optional) If you want a preview title, set it with Intent.EXTRA_TITLE
-//        sharingIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.send_intent_title))
+        // (Optional) If you want a preview title, set it with Intent.EXTRA_TITLE
+        sharingIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.send_intent_title))
 //
 //        // (Optional) if you want a preview thumbnail, create a content URI and add it
 //        // The system only supports content URIs

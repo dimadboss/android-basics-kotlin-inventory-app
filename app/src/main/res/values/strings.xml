@@ -43,7 +43,7 @@
     <string name="edit_item">Edit Item</string>
     <string name="add_new_item">Add new item</string>
 
-
+    <string name="send_intent_title">send product info</string>
 
     <string name="sending_message">Sending a message</string>
     <string name="to">To:</string>

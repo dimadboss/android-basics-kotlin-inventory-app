@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -39,10 +41,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setupActionBarWithNavController(this, navController)
 
         sharingShortcutsManager = SharingShortcutsManager().also {
-            it.pushDirectShareTargets(this)
+            delayedPush(it)
         }
     }
 
+    private fun delayedPush(input: SharingShortcutsManager){
+        Executors.newSingleThreadScheduledExecutor().schedule({
+            input.pushDirectShareTargets(this)
+        }, 2, TimeUnit.SECONDS)
+    }
 
 
     /**
