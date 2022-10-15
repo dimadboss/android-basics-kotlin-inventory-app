@@ -45,6 +45,7 @@ class AddItemFragment : Fragment() {
         val price = "%.2f".format(item.itemPrice)
         binding.apply {
             itemName.setText(item.itemName, TextView.BufferType.SPANNABLE)
+            providerEmail.setText(item.providerEmail, TextView.BufferType.SPANNABLE)
             itemPrice.setText(price, TextView.BufferType.SPANNABLE)
             itemCount.setText(item.quantityInStock.toString(), TextView.BufferType.SPANNABLE)
             saveAction.setOnClickListener { updateItem() }
@@ -69,9 +70,9 @@ class AddItemFragment : Fragment() {
     }
 
     private fun isEntryValid(): Boolean {
-        val emailError = viewModel.checkEmailValid(binding.itemEmail.text.toString())
+        val emailError = viewModel.checkEmailValid(binding.providerEmail.text.toString())
         if (emailError != null) {
-            binding.itemEmail.error = getString(emailError)
+            binding.providerEmail.error = getString(emailError)
         }
         return viewModel.isEntryValid(
             binding.itemName.text.toString(),
@@ -88,6 +89,7 @@ class AddItemFragment : Fragment() {
             binding.itemName.text.toString(),
             binding.itemPrice.text.toString(),
             binding.itemCount.text.toString(),
+            binding.providerEmail.text.toString(),
         )
         val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
         findNavController().navigate(action)
@@ -101,7 +103,8 @@ class AddItemFragment : Fragment() {
             this.navigationArgs.itemId,
             this.binding.itemName.text.toString(),
             this.binding.itemPrice.text.toString(),
-            this.binding.itemCount.text.toString()
+            this.binding.itemCount.text.toString(),
+            binding.providerEmail.text.toString(),
         )
         val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
         findNavController().navigate(action)

@@ -18,8 +18,8 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         return true
     }
 
-    fun checkEmailValid(itemEmail: String): Int? {
-        val emailValidations = BaseValidator.validate(EmailValidator(itemEmail))
+    fun checkEmailValid(providerEmail: String): Int? {
+        val emailValidations = BaseValidator.validate(EmailValidator(providerEmail))
         return if (emailValidations.isSuccess) null else emailValidations.message
     }
 
@@ -37,8 +37,13 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
     }
 
-    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
-        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
+    fun addNewItem(
+        itemName: String,
+        itemPrice: String,
+        itemCount: String,
+        providerEmail: String,
+    ) {
+        val newItem = getNewItemEntry(itemName, itemPrice, itemCount, providerEmail)
         insertItem(newItem)
     }
 
@@ -46,9 +51,10 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         itemId: Int,
         itemName: String,
         itemPrice: String,
-        itemCount: String
+        itemCount: String,
+        providerEmail: String,
     ) {
-        val updatedItem = getUpdatedItemEntry(itemId, itemName, itemPrice, itemCount)
+        val updatedItem = getUpdatedItemEntry(itemId, itemName, itemPrice, itemCount, providerEmail)
         updateItem(updatedItem)
     }
 
@@ -56,13 +62,15 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         itemId: Int,
         itemName: String,
         itemPrice: String,
-        itemCount: String
+        itemCount: String,
+        providerEmail: String,
     ): Item {
         return Item(
             id = itemId,
             itemName = itemName,
             itemPrice = itemPrice.toDouble(),
-            quantityInStock = itemCount.toInt()
+            quantityInStock = itemCount.toInt(),
+            providerEmail = providerEmail,
         )
     }
 
@@ -85,11 +93,17 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
     }
 
-    private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
+    private fun getNewItemEntry(
+        itemName: String,
+        itemPrice: String,
+        itemCount: String,
+        providerEmail: String,
+    ): Item {
         return Item(
             itemName = itemName,
             itemPrice = itemPrice.toDouble(),
-            quantityInStock = itemCount.toInt()
+            quantityInStock = itemCount.toInt(),
+            providerEmail = providerEmail,
         )
     }
 
