@@ -1,8 +1,11 @@
 package com.example.inventory
 
+
 import androidx.lifecycle.*
 import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
+import com.example.inventory.validator.BaseValidator
+import com.example.inventory.validator.EmailValidator
 import kotlinx.coroutines.launch
 
 class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
@@ -13,6 +16,11 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
             return false
         }
         return true
+    }
+
+    fun checkEmailValid(itemEmail: String): Int? {
+        val emailValidations = BaseValidator.validate(EmailValidator(itemEmail))
+        return if (emailValidations.isSuccess) null else emailValidations.message
     }
 
     fun isStockAvailable(item: Item): Boolean {

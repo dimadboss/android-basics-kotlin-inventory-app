@@ -3,7 +3,7 @@ package com.example.inventory.validator
 import android.text.TextUtils
 import com.example.inventory.R
 
-class EmailValidator(val email: String) : BaseValidator() {
+class EmailValidator(private val email: String) : BaseValidator() {
     override fun validate(): ValidateResult {
         val isValid =
             !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email)

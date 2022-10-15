@@ -69,36 +69,42 @@ class AddItemFragment : Fragment() {
     }
 
     private fun isEntryValid(): Boolean {
+        val emailError = viewModel.checkEmailValid(binding.itemEmail.text.toString())
+        if (emailError != null) {
+            binding.itemEmail.error = getString(emailError)
+        }
         return viewModel.isEntryValid(
             binding.itemName.text.toString(),
             binding.itemPrice.text.toString(),
             binding.itemCount.text.toString()
-        )
+        ) && (emailError == null)
     }
 
     private fun addNewItem() {
-        if (isEntryValid()) {
-            viewModel.addNewItem(
-                binding.itemName.text.toString(),
-                binding.itemPrice.text.toString(),
-                binding.itemCount.text.toString(),
-            )
+        if (!isEntryValid()) {
+            return
         }
+        viewModel.addNewItem(
+            binding.itemName.text.toString(),
+            binding.itemPrice.text.toString(),
+            binding.itemCount.text.toString(),
+        )
         val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
         findNavController().navigate(action)
     }
 
     private fun updateItem() {
-        if (isEntryValid()) {
-            viewModel.updateItem(
-                this.navigationArgs.itemId,
-                this.binding.itemName.text.toString(),
-                this.binding.itemPrice.text.toString(),
-                this.binding.itemCount.text.toString()
-            )
-            val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
-            findNavController().navigate(action)
+        if (!isEntryValid()) {
+            return
         }
+        viewModel.updateItem(
+            this.navigationArgs.itemId,
+            this.binding.itemName.text.toString(),
+            this.binding.itemPrice.text.toString(),
+            this.binding.itemCount.text.toString()
+        )
+        val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
+        findNavController().navigate(action)
     }
 
     /**
