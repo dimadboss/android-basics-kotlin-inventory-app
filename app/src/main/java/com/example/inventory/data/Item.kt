@@ -26,3 +26,14 @@ data class Item(
 
 fun Item.getFormattedPrice(): String =
     NumberFormat.getCurrencyInstance().format(itemPrice)
+
+fun Item.toStringPretty(): String =
+    """
+        id: $id
+        name: $itemName
+        price: ${getFormattedPrice()}
+        quantity: $quantityInStock
+        provider name: $providerName
+        provider email: $providerEmail
+        provider phone: $providerPhone
+    """.trimIndent()
