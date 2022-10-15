@@ -17,6 +17,8 @@ data class Item(
     val quantityInStock: Int,
     @ColumnInfo(name = "email")
     val providerEmail: String,
+    @ColumnInfo(name = "phone")
+    val providerPhone: String,
 )
 
 fun Item.getFormattedPrice(): String =

@@ -46,6 +46,7 @@ class AddItemFragment : Fragment() {
         binding.apply {
             itemName.setText(item.itemName, TextView.BufferType.SPANNABLE)
             providerEmail.setText(item.providerEmail, TextView.BufferType.SPANNABLE)
+            providerPhone.setText(item.providerPhone, TextView.BufferType.SPANNABLE)
             itemPrice.setText(price, TextView.BufferType.SPANNABLE)
             itemCount.setText(item.quantityInStock.toString(), TextView.BufferType.SPANNABLE)
             saveAction.setOnClickListener { updateItem() }
@@ -74,11 +75,17 @@ class AddItemFragment : Fragment() {
         if (emailError != null) {
             binding.providerEmail.error = getString(emailError)
         }
+
+        val phoneError = viewModel.checkPhoneValid(binding.providerPhone.text.toString())
+        if (phoneError != null) {
+            binding.providerPhone.error = getString(phoneError)
+        }
+
         return viewModel.isEntryValid(
             binding.itemName.text.toString(),
             binding.itemPrice.text.toString(),
             binding.itemCount.text.toString()
-        ) && (emailError == null)
+        ) && emailError == null && phoneError == null
     }
 
     private fun addNewItem() {
@@ -90,6 +97,7 @@ class AddItemFragment : Fragment() {
             binding.itemPrice.text.toString(),
             binding.itemCount.text.toString(),
             binding.providerEmail.text.toString(),
+            binding.providerPhone.text.toString(),
         )
         val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
         findNavController().navigate(action)
@@ -104,7 +112,8 @@ class AddItemFragment : Fragment() {
             this.binding.itemName.text.toString(),
             this.binding.itemPrice.text.toString(),
             this.binding.itemCount.text.toString(),
-            binding.providerEmail.text.toString(),
+            this.binding.providerEmail.text.toString(),
+            this.binding.providerPhone.text.toString(),
         )
         val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
         findNavController().navigate(action)
