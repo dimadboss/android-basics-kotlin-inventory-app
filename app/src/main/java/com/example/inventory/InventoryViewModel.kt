@@ -6,6 +6,7 @@ import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
 import com.example.inventory.validator.BaseValidator
 import com.example.inventory.validator.EmailValidator
+import com.example.inventory.validator.NameValidator
 import com.example.inventory.validator.PhoneValidator
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,11 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         return if (phoneValidations.isSuccess) null else phoneValidations.message
     }
 
+    fun checkNameValid(providerName: String): Int? {
+        val nameValidations = BaseValidator.validate(NameValidator(providerName))
+        return if (nameValidations.isSuccess) null else nameValidations.message
+    }
+
     fun isStockAvailable(item: Item): Boolean {
         return (item.quantityInStock > 0)
     }
@@ -49,8 +55,16 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         itemCount: String,
         providerEmail: String,
         providerPhone: String,
+        providerName: String,
     ) {
-        val newItem = getNewItemEntry(itemName, itemPrice, itemCount, providerEmail, providerPhone)
+        val newItem = getNewItemEntry(
+            itemName,
+            itemPrice,
+            itemCount,
+            providerEmail,
+            providerPhone,
+            providerName,
+        )
         insertItem(newItem)
     }
 
@@ -61,6 +75,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         itemCount: String,
         providerEmail: String,
         providerPhone: String,
+        providerName: String,
     ) {
         val updatedItem = getUpdatedItemEntry(
             itemId,
@@ -69,6 +84,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
             itemCount,
             providerEmail,
             providerPhone,
+            providerName,
         )
         updateItem(updatedItem)
     }
@@ -80,6 +96,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         itemCount: String,
         providerEmail: String,
         providerPhone: String,
+        providerName: String,
     ): Item {
         return Item(
             id = itemId,
@@ -88,6 +105,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
             quantityInStock = itemCount.toInt(),
             providerEmail = providerEmail,
             providerPhone = providerPhone,
+            providerName = providerName,
         )
     }
 
@@ -116,6 +134,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         itemCount: String,
         providerEmail: String,
         providerPhone: String,
+        providerName: String,
     ): Item {
         return Item(
             itemName = itemName,
@@ -123,6 +142,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
             quantityInStock = itemCount.toInt(),
             providerEmail = providerEmail,
             providerPhone = providerPhone,
+            providerName = providerName,
         )
     }
 

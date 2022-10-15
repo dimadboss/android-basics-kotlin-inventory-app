@@ -15,11 +15,14 @@ data class Item(
     val itemPrice: Double,
     @ColumnInfo(name = "quantity")
     val quantityInStock: Int,
-    @ColumnInfo(name = "email")
+    @ColumnInfo(name = "provider_email")
     val providerEmail: String,
-    @ColumnInfo(name = "phone")
+    @ColumnInfo(name = "provider_phone")
     val providerPhone: String,
-)
+    @ColumnInfo(name = "provider_name")
+    val providerName: String,
+
+    )
 
 fun Item.getFormattedPrice(): String =
     NumberFormat.getCurrencyInstance().format(itemPrice)

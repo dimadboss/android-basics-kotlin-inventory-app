@@ -103,7 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/phone_req"
-            app:layout_constraintBottom_toTopOf="@+id/save_action"
+            app:layout_constraintBottom_toTopOf="@+id/provider_name_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_email_label">
@@ -113,6 +113,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="phone"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/provider_name_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_req"
+            app:layout_constraintBottom_toTopOf="@+id/save_action"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_phone_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/provider_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
