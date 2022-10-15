@@ -23,6 +23,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.inventory.data.Contact
+import com.example.inventory.data.bind
 
 /**
  * Provides the UI for sharing a text with a [Contact].
@@ -110,13 +112,13 @@ class SendMessageActivity : Activity() {
         if (Intent.ACTION_SEND == intent.action && "text/plain" == intent.type) {
             textToShare = intent.getStringExtra(Intent.EXTRA_TEXT)
             // The intent comes from Direct share
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P &&
-                    intent.hasExtra(Intent.EXTRA_SHORTCUT_ID)) {
+            contactId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q &&
+                intent.hasExtra(Intent.EXTRA_SHORTCUT_ID)) {
                 val shortcutId = intent.getStringExtra(Intent.EXTRA_SHORTCUT_ID)
-                contactId = Integer.valueOf(shortcutId!!)
+                Integer.valueOf(shortcutId!!)
             } else {
                 // The text was shared and the user chose our app
-                contactId = Contact.invalidId
+                Contact.invalidId
             }
             return true
         }

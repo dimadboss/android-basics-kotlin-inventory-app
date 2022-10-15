@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.inventory
+package com.example.inventory.data
 
 import android.widget.TextView
+import com.example.inventory.R
 
 /**
  * Provides the list of dummy contacts.
@@ -30,7 +31,7 @@ data class Contact(val name: String) {
         /**
          * Representative invalid contact ID.
          */
-        val invalidId = -1
+        const val invalidId = -1
 
         /**
          * The contact ID.

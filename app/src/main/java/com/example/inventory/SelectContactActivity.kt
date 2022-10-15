@@ -24,6 +24,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.inventory.data.Contact
+import com.example.inventory.data.bind
 
 /**
  * The dialog for selecting a contact to share the text with. This dialog is shown when the user
