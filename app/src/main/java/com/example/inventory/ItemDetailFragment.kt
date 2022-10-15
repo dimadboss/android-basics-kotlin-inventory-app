@@ -17,6 +17,7 @@
 package com.example.inventory
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,6 +56,7 @@ class ItemDetailFragment : Fragment() {
 
             deleteItem.setOnClickListener { showConfirmationDialog() }
             editItem.setOnClickListener { editItem() }
+            shareItem.setOnClickListener { share() }
         }
     }
 
@@ -116,5 +118,30 @@ class ItemDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Emits a sample share [Intent].
+     */
+    private fun share() {
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/plain"
+        sharingIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            "TEST\nJ"
+        )//bodyEditText.text.toString())
+
+//        // (Optional) If you want a preview title, set it with Intent.EXTRA_TITLE
+//        sharingIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.send_intent_title))
+//
+//        // (Optional) if you want a preview thumbnail, create a content URI and add it
+//        // The system only supports content URIs
+//        val thumbnail = getClipDataThumbnail()
+//        thumbnail?.let {
+//            sharingIntent.clipData = it
+//            sharingIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+//        }
+
+        startActivity(Intent.createChooser(sharingIntent, null))
     }
 }

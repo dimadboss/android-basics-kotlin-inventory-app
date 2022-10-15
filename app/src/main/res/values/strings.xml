@@ -16,6 +16,7 @@
 <resources>
     <string name="app_name">Inventory</string>
     <string name="sell">Sell</string>
+    <string name="share">Share</string>
     <string name="quantity">Quantity in Stock:</string>
     <string name="quantity_req">Quantity in Stock <font color='#FF0000'>*</font></string>
     <string name="email_req">Provider email <font color='#FF0000'>*</font></string>
@@ -41,4 +42,13 @@
     <string name="currency_symbol">$</string>
     <string name="edit_item">Edit Item</string>
     <string name="add_new_item">Add new item</string>
+
+
+
+    <string name="sending_message">Sending a message</string>
+    <string name="to">To:</string>
+    <string name="send">Send</string>
+    <string name="body">Body:</string>
+    <string name="hint_body">Edit your message</string>
+    <string name="message_sent">Sent a message \"%1$s\" to %2$s</string>
 </resources>

@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var navController: NavController
 
+    private lateinit var sharingShortcutsManager: SharingShortcutsManager
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,7 +37,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         navController = navHostFragment.navController
         // Set up the action bar for use with the NavController
         setupActionBarWithNavController(this, navController)
+
+        sharingShortcutsManager = SharingShortcutsManager().also {
+            it.pushDirectShareTargets(this)
+        }
     }
+
+
 
     /**
      * Handle navigation when the user chooses Up from the action bar.
