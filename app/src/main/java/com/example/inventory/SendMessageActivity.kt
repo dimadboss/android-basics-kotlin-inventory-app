@@ -84,7 +84,11 @@ class SendMessageActivity : Activity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (data == null) {
+            finish()
+            return
+        }
         when (requestCode) {
             requestSelectContact -> {
                 if (resultCode == RESULT_OK) {

@@ -37,7 +37,7 @@ class SharingShortcutsManager {
      * Category name defined in res/xml/shortcuts.xml that accepts data of type text/plain
      * and will trigger [SendMessageActivity]
      */
-    val categoryTextShareTarget = "com.example.android.directshare.category.TEXT_SHARE_TARGET"
+    private val categoryTextShareTarget = "com.example.android.directshare.category.TEXT_SHARE_TARGET"
 
     /**
      * Define maximum number of shortcuts.
