@@ -40,12 +40,21 @@
         tools:text="$5.50" />
 
     <TextView
+        android:id="@+id/provider_details"
+        style="@style/Widget.Inventory.TextView"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_price"
+        tools:text="provider info" />
+
+    <TextView
         android:id="@+id/item_count_label"
         style="@style/Widget.Inventory.TextView"
         android:layout_width="wrap_content"
         android:text="@string/quantity"
         app:layout_constraintBaseline_toBaselineOf="@+id/item_count"
-        app:layout_constraintEnd_toStartOf="@+id/item_count"
+        app:layout_constraintEnd_toStartOf="@+id/provider_details"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -57,7 +66,7 @@
         android:layout_marginTop="@dimen/margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_count_label"
-        app:layout_constraintTop_toBottomOf="@+id/item_price"
+        app:layout_constraintTop_toBottomOf="@+id/provider_details"
         tools:text="5" />
 
     <Button

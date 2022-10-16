@@ -37,3 +37,10 @@ fun Item.toStringPretty(): String =
         provider email: $providerEmail
         provider phone: $providerPhone
     """.trimIndent()
+
+fun Item.providerDetails(): String =
+    """
+        provider name: $providerName
+        provider email: $providerEmail
+        provider phone: $providerPhone
+    """.trimIndent()
