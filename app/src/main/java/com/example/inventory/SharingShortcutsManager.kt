@@ -40,7 +40,7 @@ class SharingShortcutsManager {
      * and will trigger [SendMessageActivity]
      */
     private val categoryTextShareTarget =
-        "com.example.android.directshare.category.TEXT_SHARE_TARGET"
+        "com.example.inventory.category.TEXT_SHARE_TARGET"
 
     /**
      * Define maximum number of shortcuts.
@@ -81,7 +81,7 @@ class SharingShortcutsManager {
             // Creates a new Sharing Shortcut and adds it to the list
             // The id passed in the constructor will become EXTRA_SHORTCUT_ID in the received Intent
             shortcuts.add(
-                ShortcutInfoCompat.Builder(context, Integer.toString(id))
+                ShortcutInfoCompat.Builder(context, id.toString())
                     .setShortLabel(contact.name)
                     // Icon that will be displayed in the share target
                     .setIcon(IconCompat.createWithResource(context, contact.icon))

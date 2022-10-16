@@ -76,7 +76,7 @@ class SelectContactActivity : Activity() {
          * The action string for Intents.
          */
         const val ACTION_SELECT_CONTACT =
-                "com.example.android.directshare.intent.action.SELECT_CONTACT"
+                "com.example.inventory.intent.action.SELECT_CONTACT"
     }
 }
 
