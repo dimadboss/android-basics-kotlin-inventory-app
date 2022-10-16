@@ -66,26 +66,24 @@ class AddItemFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddItemBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    private fun getErrString(e: Int?): String? {
+        return if (e == null) null else getString(e)
+    }
+
     private fun isEntryValid(): Boolean {
         val emailError = viewModel.checkEmailValid(binding.providerEmail.text.toString())
-        if (emailError != null) {
-            binding.providerEmail.error = getString(emailError)
-        }
+        binding.providerEmail.error = getErrString(emailError)
 
         val phoneError = viewModel.checkPhoneValid(binding.providerPhone.text.toString())
-        if (phoneError != null) {
-            binding.providerPhone.error = getString(phoneError)
-        }
+        binding.providerPhone.error = getErrString(phoneError)
 
         val nameError = viewModel.checkNameValid(binding.providerName.text.toString())
-        if (nameError != null) {
-            binding.providerName.error = getString(nameError)
-        }
+        binding.providerName.error = getErrString(nameError)
 
         return viewModel.isEntryValid(
             binding.itemName.text.toString(),
