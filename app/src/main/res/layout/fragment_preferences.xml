@@ -107,5 +107,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/default_provider_name_label" />
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/use_default_values_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/use_default_values"
+            app:flow_horizontalAlign="start"
+            app:layout_constraintBottom_toTopOf="@+id/hide_sensitive_data_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/default_provider_name_label" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/hide_sensitive_data_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hide_sensitive_data"
+            app:flow_horizontalAlign="start"
+            app:layout_constraintBottom_toTopOf="@+id/prevent_sharing_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/use_default_values_switch" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/prevent_sharing_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prevent_sharing_data"
+            app:flow_horizontalAlign="start"
+            app:layout_constraintBottom_toTopOf="@+id/save_preferences_action"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hide_sensitive_data_switch" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -52,4 +52,7 @@
     <string name="body">Body:</string>
     <string name="hint_body">Edit your message</string>
     <string name="message_sent">Sent a message \"%1$s\" to %2$s</string>
+    <string name="use_default_values">Use default values</string>
+    <string name="hide_sensitive_data">Hide sensitive data</string>
+    <string name="prevent_sharing_data">Prevent sharing data</string>
 </resources>
