@@ -68,5 +68,10 @@ class ItemListFragment : Fragment() {
             )
             this.findNavController().navigate(action)
         }
+
+        binding.floatingActionButtonPreferences.setOnClickListener{
+            val action = ItemListFragmentDirections.actionItemListFragmentToPreferencesFragment()
+            this.findNavController().navigate(action)
+        }
     }
 }

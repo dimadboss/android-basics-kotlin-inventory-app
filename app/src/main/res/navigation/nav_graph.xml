@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_itemListFragment_to_addItemFragment"
             app:destination="@id/addItemFragment" />
+        <action
+            android:id="@+id/action_itemListFragment_to_preferencesFragment"
+            app:destination="@id/preferencesFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemDetailFragment"
@@ -43,6 +46,14 @@
             android:id="@+id/action_itemDetailFragment_to_addItemFragment"
             app:destination="@id/addItemFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/preferencesFragment"
+        android:name="com.example.inventory.PreferencesFragment"
+        android:label="@string/preferences_fragment_title"
+        tools:layout="@layout/fragment_preferences">
+    </fragment>
+
     <fragment
         android:id="@+id/addItemFragment"
         android:name="com.example.inventory.AddItemFragment"
