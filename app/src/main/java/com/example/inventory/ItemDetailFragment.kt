@@ -53,14 +53,19 @@ class ItemDetailFragment : Fragment() {
             itemPrice.text = item.getFormattedPrice()
             itemCount.text = item.quantityInStock.toString()
             providerDetails.text =
-                if (p.hideSensitiveData) item.providerDetailsHidden() else item.providerDetails()
+                if (p.hideSensitiveData) providerDetailsHidden() else item.providerDetails()
 
             sellItem.isEnabled = viewModel.isStockAvailable(item)
             sellItem.setOnClickListener { viewModel.sellItem(item) }
 
             deleteItem.setOnClickListener { showConfirmationDialog() }
             editItem.setOnClickListener { editItem() }
-            shareItem.setOnClickListener { share() }
+
+            if (p.preventSharing) {
+                shareItem.isEnabled = false
+            } else {
+                shareItem.setOnClickListener { share() }
+            }
         }
     }
 
@@ -129,6 +134,10 @@ class ItemDetailFragment : Fragment() {
      * Emits a sample share [Intent].
      */
     private fun share() {
+        if (encSharedPreferences.getPreferences().preventSharing) {
+            return
+        }
+
         val sharingIntent = Intent(Intent.ACTION_SEND)
         sharingIntent.type = "text/plain"
         sharingIntent.putExtra(

@@ -45,7 +45,7 @@ fun Item.providerDetails(): String =
         provider phone: $providerPhone
     """.trimIndent()
 
-fun Item.providerDetailsHidden(): String =
+fun providerDetailsHidden(): String =
     """
         provider name: ****
         provider email: ****
