@@ -17,6 +17,7 @@ package com.example.inventory
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +25,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.inventory.data.EncSharedPreferences
 import com.example.inventory.data.Item
 import com.example.inventory.databinding.FragmentAddItemBinding
-import androidx.navigation.fragment.findNavController
-import com.example.inventory.data.EncSharedPreferences
+import com.google.android.material.textfield.TextInputEditText
+
 
 /**
  * Fragment to add or update an item in the Inventory database.
@@ -143,12 +146,20 @@ class AddItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val p = encSharedPreferences.getPreferences()
+
         val id = navigationArgs.itemId
         if (id > 0) {
             // edit flow
             viewModel.retrieveItem(id).observe(this.viewLifecycleOwner) { selectedItem ->
                 item = selectedItem
                 bind(item)
+            }
+            if (p.hideSensitiveData) {
+                obscureField(binding.providerEmail)
+                obscureField(binding.providerPhone)
+                obscureField(binding.providerName)
             }
             return
         }
@@ -158,11 +169,15 @@ class AddItemFragment : Fragment() {
             addNewItem()
         }
 
-        val p = encSharedPreferences.getPreferences()
         if (p.useDefaultValues) {
             binding.providerEmail.setText(p.defaultProviderEmail, TextView.BufferType.SPANNABLE)
             binding.providerPhone.setText(p.defaultProviderPhone, TextView.BufferType.SPANNABLE)
             binding.providerName.setText(p.defaultProviderName, TextView.BufferType.SPANNABLE)
         }
+    }
+
+    private fun obscureField(f: TextInputEditText) {
+        f.isEnabled = false
+        f.transformationMethod = PasswordTransformationMethod()
     }
 }
