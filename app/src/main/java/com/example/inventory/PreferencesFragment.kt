@@ -101,9 +101,7 @@ class PreferencesFragment : Fragment() {
             binding.preventSharingSwitch.isChecked,
         )
 
-        encSharedPreferences.setPreferences(
-            item
-        )
+        encSharedPreferences.setPreferences(item)
     }
 
 
