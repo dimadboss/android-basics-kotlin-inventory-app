@@ -28,6 +28,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.inventory.data.Item
 import com.example.inventory.databinding.FragmentAddItemBinding
 import androidx.navigation.fragment.findNavController
+import com.example.inventory.data.EncSharedPreferences
 
 /**
  * Fragment to add or update an item in the Inventory database.
@@ -40,6 +41,8 @@ class AddItemFragment : Fragment() {
         )
     }
     lateinit var item: Item
+
+    private lateinit var encSharedPreferences: EncSharedPreferences
 
     private fun bind(item: Item) {
         val price = "%.2f".format(item.itemPrice)
@@ -67,6 +70,7 @@ class AddItemFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        encSharedPreferences = viewModel.encSharedPreferences
         _binding = FragmentAddItemBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -141,14 +145,24 @@ class AddItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.itemId
         if (id > 0) {
+            // edit flow
             viewModel.retrieveItem(id).observe(this.viewLifecycleOwner) { selectedItem ->
                 item = selectedItem
                 bind(item)
             }
-        } else {
-            binding.saveAction.setOnClickListener {
-                addNewItem()
-            }
+            return
+        }
+
+        // create flow
+        binding.saveAction.setOnClickListener {
+            addNewItem()
+        }
+
+        val p = encSharedPreferences.getPreferences()
+        if (p.useDefaultValues) {
+            binding.providerEmail.setText(p.defaultProviderEmail, TextView.BufferType.SPANNABLE)
+            binding.providerPhone.setText(p.defaultProviderPhone, TextView.BufferType.SPANNABLE)
+            binding.providerName.setText(p.defaultProviderName, TextView.BufferType.SPANNABLE)
         }
     }
 }
