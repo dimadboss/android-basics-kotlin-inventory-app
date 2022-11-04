@@ -2,6 +2,7 @@ package com.example.inventory
 
 
 import androidx.lifecycle.*
+import com.example.inventory.data.EncSharedPreferences
 import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
 import com.example.inventory.validator.BaseValidator
@@ -11,6 +12,8 @@ import com.example.inventory.validator.PhoneValidator
 import kotlinx.coroutines.launch
 
 class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
+    val encSharedPreferences = EncSharedPreferences()
+
     val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
 
     fun isEntryValid(itemName: String, itemPrice: String, itemCount: String): Boolean {
