@@ -21,7 +21,8 @@ data class Item(
     val providerPhone: String,
     @ColumnInfo(name = "provider_name")
     val providerName: String,
-
+    @ColumnInfo(name = "creation_way")
+    val creationWay: CreationWay = CreationWay.MANUAL,
     )
 
 fun Item.getFormattedPrice(): String =
