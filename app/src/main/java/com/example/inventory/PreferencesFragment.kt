@@ -65,7 +65,6 @@ class PreferencesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         encSharedPreferences = viewModel.encSharedPreferences
-        encSharedPreferences.initEncryptedSharedPreferences(requireContext())
         _binding = FragmentPreferencesBinding.inflate(inflater, container, false)
         return binding.root
     }

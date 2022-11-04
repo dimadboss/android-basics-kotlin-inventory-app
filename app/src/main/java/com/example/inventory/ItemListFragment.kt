@@ -44,6 +44,7 @@ class ItemListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel.encSharedPreferences.initEncryptedSharedPreferences(requireContext())
         _binding = ItemListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }

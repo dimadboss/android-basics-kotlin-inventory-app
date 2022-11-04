@@ -26,10 +26,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.inventory.data.Item
-import com.example.inventory.data.getFormattedPrice
-import com.example.inventory.data.providerDetails
-import com.example.inventory.data.toStringPretty
+import com.example.inventory.data.*
 import com.example.inventory.databinding.FragmentItemDetailBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -41,6 +38,8 @@ class ItemDetailFragment : Fragment() {
 
     lateinit var item: Item
 
+    private lateinit var encSharedPreferences: EncSharedPreferences
+
     private val viewModel: InventoryViewModel by activityViewModels {
         InventoryViewModelFactory(
             (activity?.application as InventoryApplication).database.itemDao()
@@ -48,11 +47,13 @@ class ItemDetailFragment : Fragment() {
     }
 
     private fun bind(item: Item) {
+        val p = encSharedPreferences.getPreferences()
         binding.apply {
             itemName.text = item.itemName
             itemPrice.text = item.getFormattedPrice()
             itemCount.text = item.quantityInStock.toString()
-            providerDetails.text = item.providerDetails()
+            providerDetails.text =
+                if (p.hideSensitiveData) item.providerDetailsHidden() else item.providerDetails()
 
             sellItem.isEnabled = viewModel.isStockAvailable(item)
             sellItem.setOnClickListener { viewModel.sellItem(item) }
@@ -71,6 +72,7 @@ class ItemDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        encSharedPreferences = viewModel.encSharedPreferences
         _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
