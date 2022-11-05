@@ -29,9 +29,7 @@ data class Item(
     val creationWay: CreationWay = CreationWay.MANUAL,
     )
 
-fun Item.getTmpFileName(): String = "${itemName}.json"
-
-fun Item.getFileName(): String = itemName
+fun Item.getFileName(): String = "${id}${itemName}.json"
 
 fun Item.getFormattedPrice(): String =
     NumberFormat.getCurrencyInstance().format(itemPrice)

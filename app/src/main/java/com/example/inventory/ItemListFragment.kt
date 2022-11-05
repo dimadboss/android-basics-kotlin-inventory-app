@@ -104,10 +104,10 @@ class ItemListFragment : Fragment() {
                 item = item.copy(creationWay = CreationWay.FILE)
 
                 val ok = viewModel.addItemFromFile(item)
-                if (!ok) {
-                    Toast.makeText(requireContext(), "item already exists", Toast.LENGTH_LONG)
-                        .show()
-                }
+
+                val message = "item ${item.itemName} " + if (ok) "uploaded" else "already exists"
+
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
             }
         }
     }

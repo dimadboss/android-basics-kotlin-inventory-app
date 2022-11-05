@@ -7,7 +7,7 @@ import androidx.core.net.toUri
 import androidx.security.crypto.EncryptedFile
 import androidx.security.crypto.MasterKey
 import com.example.inventory.data.Item
-import com.example.inventory.data.getTmpFileName
+import com.example.inventory.data.getFileName
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -33,7 +33,7 @@ class EncFiles {
         uri: Uri,
         item: Item,
     ) {
-        val name = item.getTmpFileName()
+        val name = item.getFileName()
         val tmp = File(ctx.cacheDir, name)
 
         if (tmp.exists()) {
