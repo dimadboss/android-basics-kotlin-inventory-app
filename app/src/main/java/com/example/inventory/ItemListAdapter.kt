@@ -39,7 +39,7 @@ class ItemListAdapter(private val onItemClicked: (Item) -> Unit) :
 
         fun bind(item: Item) {
             binding.apply {
-                itemName.text = item.itemName
+                itemName.text = "\t\t\t${item.itemName}"
                 itemPrice.text = item.getFormattedPrice()
                 itemQuantity.text = item.quantityInStock.toString()
             }
