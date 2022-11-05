@@ -1,9 +1,10 @@
-package com.example.inventory.data
+package com.example.inventory.utils
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
+import com.example.inventory.data.*
 
 
 class EncSharedPreferences {

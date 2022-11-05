@@ -24,7 +24,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.inventory.data.EncSharedPreferences
+import com.example.inventory.utils.EncSharedPreferences
 import com.example.inventory.data.Preferences
 import com.example.inventory.databinding.FragmentPreferencesBinding
 
