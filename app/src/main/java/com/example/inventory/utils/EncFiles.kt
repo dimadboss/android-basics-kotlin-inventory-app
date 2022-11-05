@@ -33,7 +33,6 @@ class EncFiles {
         uri: Uri,
         item: Item,
     ) {
-
         val name = item.getTmpFileName()
         val tmp = File(ctx.cacheDir, name)
 

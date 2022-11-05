@@ -2,6 +2,7 @@ package com.example.inventory
 
 
 import androidx.lifecycle.*
+import com.example.inventory.data.CreationWay
 import com.example.inventory.utils.EncSharedPreferences
 import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
@@ -50,6 +51,13 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         viewModelScope.launch {
             itemDao.delete(item)
         }
+    }
+
+    fun addItemFromFile(item: Item) {
+        if (item.creationWay != CreationWay.FILE) {
+            throw Exception("expected creation way FILE got ${item.creationWay}")
+        }
+        insertItem(item)
     }
 
     fun addNewItem(
