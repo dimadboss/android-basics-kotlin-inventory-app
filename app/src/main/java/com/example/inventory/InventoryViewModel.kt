@@ -53,11 +53,18 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
     }
 
-    fun addItemFromFile(item: Item) {
+    fun addItemFromFile(item: Item): Boolean {
         if (item.creationWay != CreationWay.FILE) {
             throw Exception("expected creation way FILE got ${item.creationWay}")
         }
+
+        val alreadyInserted = allItems.value?.any { it -> it.id == item.id }
+        if (alreadyInserted == true) {
+            return false
+        }
+
         insertItem(item)
+        return true
     }
 
     fun addNewItem(

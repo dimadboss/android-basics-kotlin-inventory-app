@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -99,9 +100,14 @@ class ItemListFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == OPEN_FILE && resultCode == Activity.RESULT_OK) {
             data?.data?.also { uri ->
-               var item = encFiles.decryptDate(requireContext(), uri)
-               item = item.copy(creationWay = CreationWay.FILE)
-               viewModel.addItemFromFile(item)
+                var item = encFiles.decryptDate(requireContext(), uri)
+                item = item.copy(creationWay = CreationWay.FILE)
+
+                val ok = viewModel.addItemFromFile(item)
+                if (!ok) {
+                    Toast.makeText(requireContext(), "item already exists", Toast.LENGTH_LONG)
+                        .show()
+                }
             }
         }
     }
