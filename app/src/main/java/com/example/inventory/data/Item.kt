@@ -4,7 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.text.NumberFormat
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
+@Serializable
 @Entity(tableName = "item")
 data class Item(
     @PrimaryKey(autoGenerate = true)
@@ -21,9 +24,12 @@ data class Item(
     val providerPhone: String,
     @ColumnInfo(name = "provider_name")
     val providerName: String,
+    @Transient
     @ColumnInfo(name = "creation_way")
     val creationWay: CreationWay = CreationWay.MANUAL,
     )
+
+fun Item.getFileName(): String = "${id}_${itemName}.json"
 
 fun Item.getFormattedPrice(): String =
     NumberFormat.getCurrencyInstance().format(itemPrice)

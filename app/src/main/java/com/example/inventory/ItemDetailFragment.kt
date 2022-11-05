@@ -17,6 +17,7 @@
 package com.example.inventory
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,7 +29,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.inventory.data.*
 import com.example.inventory.databinding.FragmentItemDetailBinding
+import com.example.inventory.utils.EncFiles
+import com.example.inventory.utils.EncSharedPreferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
+const val CREATE_FILE = 1
 
 /**
  * [ItemDetailFragment] displays the details of the selected item.
@@ -39,6 +44,8 @@ class ItemDetailFragment : Fragment() {
     lateinit var item: Item
 
     private lateinit var encSharedPreferences: EncSharedPreferences
+
+    private var encFiles = EncFiles()
 
     private val viewModel: InventoryViewModel by activityViewModels {
         InventoryViewModelFactory(
@@ -61,10 +68,13 @@ class ItemDetailFragment : Fragment() {
             deleteItem.setOnClickListener { showConfirmationDialog() }
             editItem.setOnClickListener { editItem() }
 
+
             if (p.preventSharing) {
                 shareItem.isEnabled = false
+                saveItem.isEnabled = false
             } else {
                 shareItem.setOnClickListener { share() }
+                saveItem.setOnClickListener { saveToFile() }
             }
         }
     }
@@ -150,4 +160,24 @@ class ItemDetailFragment : Fragment() {
 
         startActivity(Intent.createChooser(sharingIntent, null))
     }
+
+    private fun saveToFile() {
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+            putExtra(Intent.EXTRA_TITLE, item.getFileName())
+        }
+        @Suppress("DEPRECATION")
+        startActivityForResult(intent, CREATE_FILE)
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CREATE_FILE && resultCode == Activity.RESULT_OK) {
+            data?.data?.also { uri ->
+                encFiles.encryptData(requireContext(), uri, item)
+            }
+        }
+    }
+
 }
