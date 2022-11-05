@@ -34,6 +34,7 @@ import com.example.inventory.utils.EncSharedPreferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 const val CREATE_FILE = 1
+const val OPEN_FILE = 2
 
 /**
  * [ItemDetailFragment] displays the details of the selected item.
@@ -164,7 +165,7 @@ class ItemDetailFragment : Fragment() {
     private fun saveToFile() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
+            type = "application/json"
             putExtra(Intent.EXTRA_TITLE, item.getFileName())
         }
         @Suppress("DEPRECATION")

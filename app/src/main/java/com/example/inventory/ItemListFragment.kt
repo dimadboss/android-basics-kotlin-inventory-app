@@ -16,6 +16,8 @@
 
 package com.example.inventory
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +26,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.inventory.data.CreationWay
 import com.example.inventory.databinding.ItemListFragmentBinding
+import com.example.inventory.utils.EncFiles
 
 /**
  * Main fragment displaying details for all items in the database.
@@ -38,6 +42,8 @@ class ItemListFragment : Fragment() {
 
     private var _binding: ItemListFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private var encFiles = EncFiles()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,9 +76,33 @@ class ItemListFragment : Fragment() {
             this.findNavController().navigate(action)
         }
 
-        binding.floatingActionButtonPreferences.setOnClickListener{
+        binding.floatingActionButtonPreferences.setOnClickListener {
             val action = ItemListFragmentDirections.actionItemListFragmentToPreferencesFragment()
             this.findNavController().navigate(action)
+        }
+
+        binding.floatingActionButtonUpload.setOnClickListener {
+            openFile()
+        }
+    }
+
+    private fun openFile() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/json"
+        }
+        @Suppress("DEPRECATION")
+        startActivityForResult(intent, OPEN_FILE)
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == OPEN_FILE && resultCode == Activity.RESULT_OK) {
+            data?.data?.also { uri ->
+               var item = encFiles.decryptDate(requireContext(), uri)
+               item = item.copy(creationWay = CreationWay.FILE)
+               viewModel.addItemFromFile(item)
+            }
         }
     }
 }
