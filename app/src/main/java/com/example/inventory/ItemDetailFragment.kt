@@ -63,6 +63,8 @@ class ItemDetailFragment : Fragment() {
             providerDetails.text =
                 if (p.hideSensitiveData) providerDetailsHidden() else item.providerDetails()
 
+            itemCreationWay.text = item.creationWay.toString()
+
             sellItem.isEnabled = viewModel.isStockAvailable(item)
             sellItem.setOnClickListener { viewModel.sellItem(item) }
 

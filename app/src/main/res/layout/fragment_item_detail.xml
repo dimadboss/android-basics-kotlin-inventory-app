@@ -40,12 +40,21 @@
         tools:text="$5.50" />
 
     <TextView
-        android:id="@+id/provider_details"
+        android:id="@+id/item_creation_way"
         style="@style/Widget.Inventory.TextView"
         android:layout_width="wrap_content"
         android:layout_marginTop="@dimen/margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_price"
+        tools:text="manual" />
+
+    <TextView
+        android:id="@+id/provider_details"
+        style="@style/Widget.Inventory.TextView"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_creation_way"
         tools:text="provider info" />
 
     <TextView
