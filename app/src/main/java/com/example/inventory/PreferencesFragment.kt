@@ -24,6 +24,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.inventory.utils.EncSharedPreferences
 import com.example.inventory.data.Preferences
 import com.example.inventory.databinding.FragmentPreferencesBinding
@@ -101,6 +102,8 @@ class PreferencesFragment : Fragment() {
         )
 
         encSharedPreferences.setPreferences(item)
+
+        findNavController().navigateUp()
     }
 
 
